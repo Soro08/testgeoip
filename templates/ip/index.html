@@ -8,5 +8,49 @@
 </head>
 <body>
     
+
+    <div id="app">
+
+    </div>
+    <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+    <script src='https://unpkg.com/axios/dist/axios.min.js'></script>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                base_url: window.location.protocol + '//' + window.location.host + '/'
+            },
+            delimiters:["${", "}"],
+            mounted() {
+                // window.location.replace('/cool/img')
+                this.getMyInfo();
+            },
+            methods: {
+                getMyInfo: function(){
+                    axios.get("https://freegeoip.app/json/")
+                    .then(reponse => {
+                        console.log(reponse.data)
+                        this.postMyInfo(reponse.data)
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                    })
+                },
+                postMyInfo: function(data) {
+                    axios.defaults.xsrfCookieName = 'csrftoken';
+                    axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+                    axios.post('/cool/post', data)
+                    .then((response) => {
+                        console.log(response.data);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
+                },
+            }
+        })
+    </script>
+
 </body>
 </html>

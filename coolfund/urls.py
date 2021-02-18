@@ -6,4 +6,6 @@ urlpatterns = [
 
 
     path('api', views.getuseripinfo),
+    path('img', views.trackopenmail),
+    path('post', views.postuserposition),
 ]
