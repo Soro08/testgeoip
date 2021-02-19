@@ -55,3 +55,42 @@
     import json
     postdata = json.loads(request.body.decode('utf-8'))
 ```
+
+```html
+
+<html>
+<head>
+  <title>{page_title}</title>
+</head>
+<body>
+
+
+ <div>
+    <iframe src="https://player.vimeo.com/video/500783856" width="700" height="650" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+ 
+</div>
+
+  <script src="https://player.vimeo.com/api/player.js"></script>
+  <script>
+    var iframe = document.querySelector('iframe');
+    var player = new Vimeo.Player(iframe);
+
+    player.on('play', function() {
+      console.log('Played the video');
+    });
+
+    player.getVideoTitle().then(function(title) {
+      console.log('title:', title);
+    });
+
+    player.on('ended', function(data) {
+    
+    iframe.setAttribute("src", "https://cdn.pixabay.com/photo/2021/01/30/09/59/coffee-5963334_1280.jpg") 
+      console.log('end ', data)
+    });
+  </script>
+
+</body>
+</html>
+
+```
